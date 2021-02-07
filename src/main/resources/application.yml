@@ -1,0 +1,30 @@
+# 应用名称
+spring:
+  application:
+    name: vueblog
+
+  # mysql配置信息
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/vueblog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: xtn1208
+
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+
+shiro-redis:
+  enabled: true
+  redis-manager:
+    host: 127.0.0.1:6379
+
+xtn:
+  jwt:
+    # 加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token有效时长，7天，单位秒
+    expire: 604800
+    header: token

@@ -29,7 +29,7 @@ public class BlogController {
      * @param pageSize 一页显示的条数
      * @return
      */
-    @GetMapping(value = "/List")
+    @GetMapping(value = "/list")
     public CommonResult list(@RequestParam(defaultValue = "1") Integer pageNum,Integer pageSize){
         Pagination<Blog> pagination = blogService.selectBlogList(pageNum, pageSize);
         return CommonResult.success(pagination);

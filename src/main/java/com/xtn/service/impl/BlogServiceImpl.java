@@ -34,13 +34,6 @@ public class BlogServiceImpl implements BlogService {
         //pageNum:查询的页数，pageSize:一页显示的数量
         PageHelper.startPage(pageNum,pageSize);
         List<Blog> blogList = blogMapper.selectBlogList();
-        for (int i = 0; i < blogList.size(); i++) {
-            System.out.println("------------------");
-            System.out.println(blogList.get(i).getUserId());
-            System.out.println(blogList.get(i).getId());
-            System.out.println(blogList.get(i).getCreated());
-            System.out.println("------------------");
-        }
 
         //获取总记录数pageInfo.getTotal()
         PageInfo<Blog> pageInfo = new PageInfo<>(blogList);

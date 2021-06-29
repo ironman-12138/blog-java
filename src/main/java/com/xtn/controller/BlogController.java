@@ -4,12 +4,16 @@ import cn.hutool.core.date.DateUtil;
 import com.xtn.common.CommonResult;
 import com.xtn.common.Pagination;
 import com.xtn.domain.Blog;
+import com.xtn.domain.Comment;
 import com.xtn.service.BlogService;
+import com.xtn.service.CommentService;
 import com.xtn.util.ShiroUtil;
+import com.xtn.vo.SelectVo;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 博客控制层
@@ -22,16 +26,16 @@ public class BlogController {
 
     @Resource
     private BlogService blogService;
+    @Resource
+    private CommentService commentService;
 
     /**
      * 分页查询博客信息
-     * @param pageNum 查询的页号
-     * @param pageSize 一页显示的条数
      * @return
      */
-    @GetMapping(value = "/list")
-    public CommonResult list(@RequestParam(defaultValue = "1") Integer pageNum,Integer pageSize){
-        Pagination<Blog> pagination = blogService.selectBlogList(pageNum, pageSize);
+    @PostMapping(value = "/list")
+    public CommonResult list(@RequestBody SelectVo selectVo){
+        Pagination<Blog> pagination = blogService.selectBlogList(selectVo.getPageNum(), selectVo.getPageSize(),selectVo.getTitle());
         return CommonResult.success(pagination);
     }
 
@@ -115,6 +119,23 @@ public class BlogController {
             return CommonResult.success(200,"删除成功");
         }else {
             return CommonResult.failure(400,"删除失败");
+        }
+    }
+
+    /**
+     * 添加博客评论
+     * @return
+     */
+    @RequiresAuthentication  //只有登录认证后才能调用方法
+    @PostMapping(value = "/saveComment")
+    public CommonResult saveComment(@RequestBody Comment comment){
+        boolean flag = false;
+        comment.setCreateTime(new Date());
+        flag = commentService.saveComment(comment);
+        if (flag){
+            return CommonResult.success(200,"评论成功");
+        }else {
+            return CommonResult.failure(400,"评论失败");
         }
     }
 }

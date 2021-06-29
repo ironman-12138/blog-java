@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtn.dao.MessageMapper">
+    <select id="selectList" resultType="com.xtn.domain.Message">
+        select *
+        from
+        message
+        order by created desc
+    </select>
+
+    <insert id="saveMessage" parameterType="com.xtn.domain.Message">
+    insert into message (
+      `name`, content, created)
+    values (#{name}, #{content},
+      #{created})
+  </insert>
+
+</mapper>

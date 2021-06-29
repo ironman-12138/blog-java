@@ -3,6 +3,7 @@ package com.xtn.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class Blog {
     private Long id;
@@ -19,6 +20,8 @@ public class Blog {
     private Byte status;
 
     private String content;
+
+    private List<Comment> commentList;
 
     public Long getId() {
         return id;
@@ -74,5 +77,13 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 }

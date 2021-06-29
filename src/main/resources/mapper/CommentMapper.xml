@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtn.dao.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.xtn.domain.Comment">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="blog_id" jdbcType="BIGINT" property="blogId" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="peo_id" jdbcType="BIGINT" property="peoId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+    </resultMap>
+    <select id="selectByBlogId" resultMap="BaseResultMap">
+        select *
+        from
+        comment
+        where blog_id = #{id}
+        order by create_time desc
+    </select>
+
+    <insert id="saveComment" parameterType="com.xtn.domain.Comment">
+    insert into comment (blog_id, peo_id,
+      `name`, content, avatar, create_time)
+    values (#{blogId}, #{peoId},
+      #{name}, #{content}, #{avatar}, #{createTime})
+  </insert>
+
+</mapper>

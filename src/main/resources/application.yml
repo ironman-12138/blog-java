@@ -6,7 +6,7 @@ spring:
   # mysql配置信息
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/vueblog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://47.96.100.109:3306/vueblog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: xtn1208
 
@@ -19,7 +19,8 @@ mybatis:
 shiro-redis:
   enabled: true
   redis-manager:
-    host: 127.0.0.1:6379
+    host: 47.96.100.109:6379
+
 
 xtn:
   jwt:

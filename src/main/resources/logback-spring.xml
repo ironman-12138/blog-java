@@ -15,6 +15,7 @@ true -->
        于或等于此级别的日志信息-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>debug</level>
+<!--            <level>FATAL</level>-->
         </filter>
         <encoder>
             <Pattern>%date [%-5p] [%thread] %logger{60} [%file : %line] %msg%n</Pattern>

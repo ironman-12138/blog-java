@@ -11,7 +11,7 @@ import com.xtn.domain.Blog;
 public interface BlogService {
 
     //分页查询博客信息
-    public Pagination<Blog> selectBlogList(Integer pageNum,Integer pageSize);
+    public Pagination<Blog> selectBlogList(Integer pageNum,Integer pageSize,String title);
 
     //根据id查询博客信息
     public Blog selectBlogById(Long id);

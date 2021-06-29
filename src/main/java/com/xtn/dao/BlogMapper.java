@@ -1,6 +1,7 @@
 package com.xtn.dao;
 
 import com.xtn.domain.Blog;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface BlogMapper {
 
     int updateByPrimaryKey(Blog record);
 
-    List<Blog> selectBlogList();
+    List<Blog> selectBlogList(@Param(value="title") String title);
 }

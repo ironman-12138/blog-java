@@ -19,10 +19,10 @@
     </select>
 
     <insert id="saveComment" parameterType="com.xtn.domain.Comment">
-    insert into comment (blog_id, peo_id,
-      `name`, content, avatar, create_time)
-    values (#{blogId}, #{peoId},
-      #{name}, #{content}, #{avatar}, #{createTime})
-  </insert>
+        insert into comment (blog_id, peo_id,
+          `name`, content, avatar, create_time)
+        values (#{blogId}, #{peoId},
+          #{name}, #{content}, #{avatar}, #{createTime})
+    </insert>
 
 </mapper>

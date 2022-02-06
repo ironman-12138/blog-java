@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtn.dao.AnswerRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.xtn.domain.AnswerRecord">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+        <result column="success_num" jdbcType="INTEGER" property="successNum" />
+        <result column="fail_num" jdbcType="INTEGER" property="failNum" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO
+            answer_record ( total_num,success_num,fail_num,user_id,username,create_time )
+        VALUES
+            (#{totalNum},#{successNum},#{failNum},#{userId},#{username},#{createTime});
+    </insert>
+
+    <select id="selectPageList" resultMap="BaseResultMap">
+        SELECT
+            id,total_num,success_num,fail_num,user_id,username,create_time
+        FROM
+            answer_record
+        WHERE
+            user_id = #{userId}
+    </select>
+</mapper>

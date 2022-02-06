@@ -25,12 +25,16 @@ public class CommonResult implements Serializable {
         return commonResult;
     }
 
+    public static CommonResult success(){
+        return success(200, "成功");
+    }
+
     public static CommonResult success(Object data){
-        return success(200,"成功",data);
+        return success(200, "成功", data);
     }
 
     public static CommonResult success(Integer code, String message){
-        return success(code,message,null);
+        return success(code, message, null);
     }
 
     //返回失败结果的方法

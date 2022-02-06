@@ -10,6 +10,12 @@ spring:
     username: root
     password: xtn1208
 
+  redis:
+    host: 47.96.100.109
+    port: 6379
+    timeout: 10000
+    password: xcoder
+
 server:
   port: 8081
 

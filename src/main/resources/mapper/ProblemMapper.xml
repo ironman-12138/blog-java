@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xtn.dao.ProblemMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.xtn.domain.Problem" id="problemMap">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="answer" column="answer"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <insert id="save">
+        insert into problem (title, answer, `type`)
+        values (#{title}, #{answer}, #{type})
+    </insert>
+
+    <update id="updateById">
+        update m_blog
+        <set>
+            <if test="answer != null">
+                answer = #{answer},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        delete from problem
+        <where>
+            <if test="ids != null">
+                id IN
+                <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+    <select id="selectProblemList" resultType="com.xtn.domain.Problem">
+        select
+            id, title, answer, `type`
+        from
+            problem
+        <where>
+            <if test="title != null and title != ''">
+                title = #{title}
+            </if>
+            <if test="type != null and type != ''">
+                `type` = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="getInfoById" resultType="com.xtn.domain.Problem">
+        select
+            id, title, answer, `type`
+        from
+            problem
+        where
+            id = #{id}
+    </select>
+
+    <select id="getIdList" resultType="java.lang.Long">
+        SELECT
+            id
+        FROM
+            problem
+        <where>
+            <if test="type != null and type != ''">
+                `type` = #{type}
+            </if>
+        </where>
+        ORDER BY RAND()
+        LIMIT #{num};
+    </select>
+
+
+</mapper>

@@ -2,10 +2,12 @@ package com.xtn.controller;
 
 import com.xtn.common.CommonResult;
 import com.xtn.common.Pagination;
+import com.xtn.common.ResultCode;
 import com.xtn.domain.AnswerRecord;
 import com.xtn.service.AnswerRecordService;
 import com.xtn.vo.RecordSelectVo;
 import com.xtn.vo.SelectVo;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,9 @@ public class AnswerRecordController {
      **/
     @RequestMapping("/insert")
     public CommonResult insert(@RequestBody RecordSelectVo vo){
+        if (StringUtils.isEmpty(vo.getUserId())) {
+            return CommonResult.failure(ResultCode.NO_LOGIN);
+        }
         return answerRecordService.insert(vo.getUserId());
     }
 
@@ -37,6 +42,9 @@ public class AnswerRecordController {
      **/
     @RequestMapping("/pageList")
     public CommonResult pageList(@RequestBody RecordSelectVo selectVo) {
+        if (StringUtils.isEmpty(selectVo.getUserId())) {
+            return CommonResult.failure(ResultCode.NO_LOGIN);
+        }
         Pagination<AnswerRecord> pageList = answerRecordService.pageList(selectVo);
         return CommonResult.success(pageList);
     }

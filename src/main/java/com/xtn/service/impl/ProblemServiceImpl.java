@@ -13,6 +13,7 @@ import com.xtn.vo.ProblemInitVo;
 import com.xtn.vo.ProblemSelectVo;
 import com.xtn.vo.SelectVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -72,6 +73,7 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Transactional
     public Problem random() {
         System.out.println("随机获取题目--------------start");
         Integer id = (Integer) redisUtil.sPopSet("problemIds");
@@ -84,6 +86,7 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Transactional
     public String check(Problem problem) {
         System.out.println("检测答案并保存------------start");
         Problem info = problemMapper.getInfoById(problem.getId());

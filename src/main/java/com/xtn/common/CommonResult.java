@@ -25,12 +25,20 @@ public class CommonResult implements Serializable {
         return commonResult;
     }
 
+    public static CommonResult success(ResultCode resultCode){
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(resultCode.getCode());
+        commonResult.setMessage(resultCode.getDesc());
+        commonResult.setData(null);
+        return commonResult;
+    }
+
     public static CommonResult success(){
-        return success(200, "成功");
+        return success(ResultCode.SUCCESS);
     }
 
     public static CommonResult success(Object data){
-        return success(200, "成功", data);
+        return success(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getDesc(), data);
     }
 
     public static CommonResult success(Integer code, String message){
@@ -46,11 +54,19 @@ public class CommonResult implements Serializable {
         return commonResult;
     }
 
-    public static CommonResult failure(Integer code, String message, Object data){
+    public static CommonResult failure(ResultCode resultCode){
         CommonResult commonResult = new CommonResult();
-        commonResult.setCode(code);
-        commonResult.setMessage(message);
-        commonResult.setData(data);
+        commonResult.setCode(resultCode.getCode());
+        commonResult.setMessage(resultCode.getDesc());
+        commonResult.setData(null);
+        return commonResult;
+    }
+
+    public static CommonResult failure(){
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(ResultCode.FAIL.getCode());
+        commonResult.setMessage(ResultCode.FAIL.getDesc());
+        commonResult.setData(null);
         return commonResult;
     }
 }

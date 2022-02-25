@@ -69,7 +69,7 @@ public class AccountController {
     @RequiresAuthentication
     public CommonResult logout() {
         SecurityUtils.getSubject().logout();
-        return CommonResult.success(null);
+        return CommonResult.success();
     }
 
 }

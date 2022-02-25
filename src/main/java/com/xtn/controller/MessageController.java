@@ -2,12 +2,14 @@ package com.xtn.controller;
 
 import com.xtn.common.CommonResult;
 import com.xtn.common.Pagination;
+import com.xtn.common.ResultCode;
 import com.xtn.domain.Blog;
 import com.xtn.domain.Comment;
 import com.xtn.domain.Message;
 import com.xtn.service.MessageService;
 import com.xtn.vo.SelectVo;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,12 +43,15 @@ public class MessageController {
     @PostMapping(value = "/saveMessage")
     public CommonResult saveMessage(@RequestBody Message message){
         boolean flag = false;
+        if (StringUtils.isEmpty(message.getContent())) {
+            return CommonResult.failure(ResultCode.NO_COMPLETELY);
+        }
         message.setCreated(new Date());
         flag = messageService.saveMessage(message);
         if (flag){
-            return CommonResult.success(200,"成功");
+            return CommonResult.success();
         }else {
-            return CommonResult.failure(400,"留言失败");
+            return CommonResult.failure();
         }
     }
 

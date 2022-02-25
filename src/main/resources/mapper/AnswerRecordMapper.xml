@@ -26,5 +26,7 @@
             answer_record
         WHERE
             user_id = #{userId}
+        ORDER BY
+            create_time desc
     </select>
 </mapper>

@@ -25,7 +25,7 @@ mybatis:
 shiro-redis:
   enabled: true
   redis-manager:
-    host: 47.96.100.109:6379
+    host: 127.0.0.1:6379
 
 
 xtn:
